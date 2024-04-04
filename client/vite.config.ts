@@ -14,6 +14,8 @@ export default defineConfig({
     alias: [
       { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
       { find: '@app', replacement: fileURLToPath(new URL('./src/app', import.meta.url)) },
+      { find: '@widgets', replacement: fileURLToPath(new URL('./src/widgets', import.meta.url)) },
+      { find: '@widgets/social-links-profile', replacement: fileURLToPath(new URL('./src/widgets/social-links-profile', import.meta.url)) },
     ],
   }
 })
