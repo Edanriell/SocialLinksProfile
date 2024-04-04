@@ -7,7 +7,7 @@
 <template>
 	<article class="social-links-profile">
 		<picture>
-			<source media="(min-width: 320px)" srcset="{{imageMobile}}">
+			<source media="(min-width: 375px)" srcset="{{imageMobile}}">
 			<source media="(min-width: 768px)" srcset="{{imageTablet}}">
 			<source media="(min-width: 1024px)" srcset="{{imageDesktop}}">
 			<img class="social-links-profile__user-image" src="{{imageDesktop}}" alt="User X profile">
@@ -46,15 +46,69 @@
 </template>
 
 <style>
-	.social-links-profile{}
-	.social-links-profile__user-image{}
-	.social-links-profile__user-full-name{}
-	.social-links-profile__user-location{}
-	.social-links-profile__user-info{}
-	.social-links-profile__user-link-list{}
+	.social-links-profile {
+		max-width: 32.7rem;
+		padding: 2.4rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
-	.user-links-list{}
-	.user-links-list__item{}
-	.user-links-list__item-link{}
-	.user-links-list__item-link-name{}
+	.social-links-profile__user-image {
+		width: 8.8rem;
+		height: 8.8rem;
+		border-radius: 50%;
+		margin-bottom: 2.4rem;
+	}
+
+	.social-links-profile__user-full-name {
+		font-family: var(--font-family);
+		font-weight: 600;
+		font-size: 2.4rem;
+		color: var(--white);
+		margin-bottom: 0.4rem;
+	}
+
+	.social-links-profile__user-location {
+		font-family: var(--font-family);
+		font-weight: 700;
+		font-size: 1.4rem;
+		color: var(--neon-green);
+		margin-bottom: 2.4rem;
+	}
+
+	.social-links-profile__user-info {
+		font-family: var(--font-family);
+		font-weight: 400;
+		font-size: 1.4rem;
+		color: var(--white);
+	}
+
+	.social-links-profile__user-link-list {
+		list-style: none;
+	}
+
+	.user-links-list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 1.6rem;
+	}
+
+	.user-links-list__item {
+		width: 100%;
+		padding-top: 1.2rem;
+		padding-bottom: 1.2rem;
+	}
+
+	.user-links-list__item-link {
+		width: 100%;
+	}
+
+	.user-links-list__item-link-name {
+		font-family: var(--font-family);
+		font-weight: 700;
+		font-size: 1.4rem;
+		color: var(--white);
+	}
 </style>

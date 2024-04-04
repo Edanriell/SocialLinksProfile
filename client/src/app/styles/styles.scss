@@ -1,6 +1,15 @@
 @use "./fonts";
 @use "./sanitize";
 
+:root {
+	--black: hsl(0, 0%, 8%);
+	--dark-grey: hsl(0, 0%, 12%);
+	--grey: hsl(0, 0%, 20%);
+	--white: hsl(0, 0%, 100%);
+	--neon-green: hsl(75, 94%, 57%);
+	--font-family: "Inter", sans-serif;
+}
+
 html {
 	font-size: 62.5%;
 	scroll-behavior: smooth;
