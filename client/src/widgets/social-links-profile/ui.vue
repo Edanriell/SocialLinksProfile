@@ -70,7 +70,7 @@
 		font-weight: 600;
 		font-size: 2.4rem;
 		color: var(--white);
-		margin-bottom: 0.4rem;
+		margin: 0 0 0.4rem;
 		text-align: center;
 	}
 
@@ -79,11 +79,12 @@
 		font-weight: 700;
 		font-size: 1.4rem;
 		color: var(--neon-green);
-		margin-bottom: 2.4rem;
+		margin: 0 0 2.4rem;
 		text-align: center;
 	}
 
 	.social-links-profile__user-info {
+		margin: 0 0 2.4rem;
 		font-family: var(--font-family);
 		font-weight: 400;
 		font-size: 1.4rem;
@@ -93,6 +94,7 @@
 
 	.social-links-profile__user-link-list {
 		list-style: none;
+		margin: 0;
 	}
 
 	.user-links-list {
@@ -115,7 +117,7 @@
 		padding-top: 1.2rem;
 		padding-bottom: 1.2rem;
 		text-decoration: none;
-		border-radius: 1.2rem;
+		border-radius: 0.8rem;
 		background: var(--grey);
 	}
 
@@ -124,5 +126,12 @@
 		font-weight: 700;
 		font-size: 1.4rem;
 		color: var(--white);
+	}
+
+	@media only screen and (min-width: 768px) {
+		.social-links-profile {
+			max-width: 38.4rem;
+			padding: 4rem;
+		}
 	}
 </style>

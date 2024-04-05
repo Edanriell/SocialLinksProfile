@@ -22,4 +22,10 @@
 		align-items: center;
 		min-height: 100vh;
 	}
+
+	@media only screen and (min-width: 768px) {
+		.container {
+			padding: 17.4rem 0 17.5rem;
+		}
+	}
 </style>
