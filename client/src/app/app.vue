@@ -3,7 +3,7 @@
 </script>
 
 <template>
-	<main class="main">
+	<main class="container">
 		<h1 class="visually-hidden">Social links profile</h1>
 		<SocialLinksProfile />
 	</main>
@@ -12,12 +12,11 @@
 <style>
 	@import "./styles/styles.scss";
 
-	.main {
+	.container {
 		width: 100%;
 		height: 100%;
 		background: var(--black);
-		padding-top: 11.6rem;
-		padding-bottom: 11.7rem;
+		padding: 11.6rem 2.4rem 11.7rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;

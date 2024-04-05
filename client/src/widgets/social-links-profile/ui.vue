@@ -48,6 +48,7 @@
 <style>
 	.social-links-profile {
 		max-width: 32.7rem;
+		width: 100%;
 		padding: 2.4rem;
 		display: flex;
 		flex-direction: column;
