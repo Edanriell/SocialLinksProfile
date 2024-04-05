@@ -7,17 +7,17 @@
 <template>
 	<article class="social-links-profile">
 		<picture>
-			<source media="(min-width: 375px)" srcset="{{imageMobile}}">
-			<source media="(min-width: 768px)" srcset="{{imageTablet}}">
-			<source media="(min-width: 1024px)" srcset="{{imageDesktop}}">
-			<img class="social-links-profile__user-image" src="{{imageDesktop}}" alt="User X profile">
+			<source media="(min-width: 375px)" :srcset="imageMobile" />
+			<source media="(min-width: 768px)" :srcset="imageTablet" />
+			<source media="(min-width: 1024px)" :srcset="imageDesktop" />
+			<img class="social-links-profile__user-image" :src="imageDesktop" alt="User X profile" />
 		</picture>
 		<h2 class="social-links-profile__user-full-name">Jessica Randall</h2>
 		<p class="social-links-profile__user-location">London, United Kingdom</p>
 		<p class="social-links-profile__user-info">"Front-end developer and avid reader."</p>
 		<ul class="social-links-profile__user-link-list user-links-list">
 			<li class="user-links-list__item">
-				<a class="user-links-list__item-link"	href="#" target="_blank">
+				<a class="user-links-list__item-link" href="#" target="_blank">
 					<span class="user-links-list__item-link-name">GitHub</span>
 				</a>
 			</li>
@@ -52,6 +52,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		background: var(--dark-grey);
+		border-radius: 1.2rem;
 	}
 
 	.social-links-profile__user-image {
@@ -59,6 +61,7 @@
 		height: 8.8rem;
 		border-radius: 50%;
 		margin-bottom: 2.4rem;
+		object-fit: cover;
 	}
 
 	.social-links-profile__user-full-name {
@@ -67,6 +70,7 @@
 		font-size: 2.4rem;
 		color: var(--white);
 		margin-bottom: 0.4rem;
+		text-align: center;
 	}
 
 	.social-links-profile__user-location {
@@ -75,6 +79,7 @@
 		font-size: 1.4rem;
 		color: var(--neon-green);
 		margin-bottom: 2.4rem;
+		text-align: center;
 	}
 
 	.social-links-profile__user-info {
@@ -82,6 +87,7 @@
 		font-weight: 400;
 		font-size: 1.4rem;
 		color: var(--white);
+		text-align: center;
 	}
 
 	.social-links-profile__user-link-list {
@@ -93,16 +99,23 @@
 		flex-direction: column;
 		align-items: center;
 		row-gap: 1.6rem;
+		width: 100%;
+		padding: 0;
 	}
 
 	.user-links-list__item {
 		width: 100%;
-		padding-top: 1.2rem;
-		padding-bottom: 1.2rem;
 	}
 
 	.user-links-list__item-link {
+		display: flex;
+		justify-content: center;
 		width: 100%;
+		padding-top: 1.2rem;
+		padding-bottom: 1.2rem;
+		text-decoration: none;
+		border-radius: 1.2rem;
+		background: var(--grey);
 	}
 
 	.user-links-list__item-link-name {
