@@ -1,7 +1,34 @@
 <script setup lang="ts">
+	import gsap from "gsap";
+	import { ref } from "vue";
+
 	import imageMobile from "./assets/profile-mobile.jpg";
 	import imageTablet from "./assets/profile-tablet.jpg";
 	import imageDesktop from "./assets/profile-tablet.jpg";
+
+	const follower = ref(null);
+
+	const mouseMoveListener = (event: any) => {
+		const { target, x, y } = event;
+		const isTargetLinkOrBtn = target?.closest("a") || target?.closest("button");
+		gsap.to(follower.value, {
+			x: x,
+			y: y,
+			width: "60px",
+			height: "60px",
+			duration: 1,
+			ease: "power4",
+			opacity: isTargetLinkOrBtn ? 0.6 : 1
+		});
+	};
+
+	const mouseEnter = (event: any) => {
+		window.addEventListener("mousemove", mouseMoveListener);
+	};
+
+	const mouseLeave = (event: any) => {
+		window.removeEventListener("mousemove", mouseMoveListener);
+	};
 </script>
 
 <template>
@@ -27,8 +54,15 @@
 				</a>
 			</li>
 			<li class="user-links-list__item">
-				<a class="user-links-list__item-link" href="#" target="_blank">
+				<a
+					class="user-links-list__item-link"
+					href="#"
+					target="_blank"
+					@mouseenter="(event) => mouseEnter(event)"
+					@mouseleave="(event) => mouseLeave(event)"
+				>
 					<span class="user-links-list__item-link-name">LinkedIn</span>
+					<div ref="follower" class="follower"></div>
 				</a>
 			</li>
 			<li class="user-links-list__item">
@@ -46,6 +80,30 @@
 </template>
 
 <style>
+	.follower {
+		background-color: crimson;
+		z-index: 1;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		width: 10px;
+		height: 10px;
+
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		bottom: 0;
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transform-origin: 0 0;
+		will-change: transform;
+		translate: none;
+		rotate: none;
+		scale: none;
+	}
+
 	.social-links-profile {
 		max-width: 32.7rem;
 		width: 100%;
