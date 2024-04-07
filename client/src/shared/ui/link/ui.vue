@@ -2,6 +2,11 @@
 	import gsap from "gsap";
 	import { ref } from "vue";
 
+	const props = defineProps({
+		linkText: String,
+		linkHref: String
+	});
+
 	const flairRef = ref(null);
 	const textRef = ref(null);
 	const linkRef = ref(null);
@@ -90,7 +95,7 @@
 <template>
 	<a
 		class="link"
-		href="#"
+		:href="linkHref"
 		target="_blank"
 		ref="linkRef"
 		type="button"
@@ -99,7 +104,7 @@
 		@touchstart="handleTouchStart"
 		@touchend="handleTouchEnd"
 	>
-		<span ref="textRef" class="link__text">LinkedIn</span>
+		<span ref="textRef" class="link__text">{{ linkText }}</span>
 		<div ref="flairRef" class="link__flair"></div>
 	</a>
 </template>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+	import { Link } from "@shared/ui";
+
 	import imageMobile from "./assets/profile-mobile.jpg";
 	import imageTablet from "./assets/profile-tablet.jpg";
 	import imageDesktop from "./assets/profile-tablet.jpg";
@@ -17,25 +19,19 @@
 		<p class="social-links-profile__user-info">"Front-end developer and avid reader."</p>
 		<ul class="social-links-profile__user-link-list user-links-list">
 			<li class="user-links-list__item">
-				<a class="user-links-list__item-link" href="#" target="_blank">
-					<span class="user-links-list__item-link-name">GitHub</span>
-				</a>
+				<Link linkText="GitHub" linkHref="#" />
 			</li>
 			<li class="user-links-list__item">
-				<a class="user-links-list__item-link" href="#" target="_blank">
-					<span class="user-links-list__item-link-name">Frontend Mentor</span>
-				</a>
-			</li>
-			<li class="user-links-list__item"></li>
-			<li class="user-links-list__item">
-				<a class="user-links-list__item-link" href="#" target="_blank">
-					<span class="user-links-list__item-link-name">Twitter</span>
-				</a>
+				<Link linkText="Frontend Mentor" linkHref="#" />
 			</li>
 			<li class="user-links-list__item">
-				<a class="user-links-list__item-link" href="#" target="_blank">
-					<span class="user-links-list__item-link-name">Instagram</span>
-				</a>
+				<Link linkText="LinkedIn" linkHref="#" />
+			</li>
+			<li class="user-links-list__item">
+				<Link linkText="Twitter" linkHref="#" />
+			</li>
+			<li class="user-links-list__item">
+				<Link linkText="Instagram" linkHref="#" />
 			</li>
 		</ul>
 	</article>
