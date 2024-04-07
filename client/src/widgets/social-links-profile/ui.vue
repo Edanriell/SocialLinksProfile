@@ -6,27 +6,57 @@
 	import imageTablet from "./assets/profile-tablet.jpg";
 	import imageDesktop from "./assets/profile-tablet.jpg";
 
-	const follower = ref(null);
+	const flairRef = ref(null);
+	const textRef = ref(null);
 
 	const mouseMoveListener = (event: any) => {
-		const { target, x, y } = event;
-		const isTargetLinkOrBtn = target?.closest("a") || target?.closest("button");
-		gsap.to(follower.value, {
-			x: x,
-			y: y,
-			width: "60px",
-			height: "60px",
-			duration: 1,
-			ease: "power4",
-			opacity: isTargetLinkOrBtn ? 0.6 : 1
+		const { target, offsetX, offsetY } = event;
+
+		const targetWidth = target.getBoundingClientRect().width;
+
+		gsap.to(flairRef.value, {
+			translateX: offsetX,
+			translateY: offsetY,
+			width: targetWidth * 1.5 + "px",
+			height: targetWidth * 1.5 + "px",
+			duration: 0.25,
+			ease: "power1"
 		});
 	};
 
 	const mouseEnter = (event: any) => {
+		const { offsetX, offsetY } = event;
+
+		gsap.to(textRef.value, {
+			color: "#333",
+			duration: 0.25,
+			ease: "power1"
+		});
+
+		gsap.set(flairRef.value, {
+			width: "0px",
+			height: "0px",
+			translateX: offsetX,
+			translateY: offsetY
+		});
+
 		window.addEventListener("mousemove", mouseMoveListener);
 	};
 
-	const mouseLeave = (event: any) => {
+	const mouseLeave = () => {
+		gsap.to(textRef.value, {
+			color: "#fff",
+			duration: 0.25,
+			ease: "power1"
+		});
+
+		gsap.to(flairRef.value, {
+			width: "0px",
+			height: "0px",
+			duration: 0.25,
+			ease: "power1"
+		});
+
 		window.removeEventListener("mousemove", mouseMoveListener);
 	};
 </script>
@@ -59,10 +89,10 @@
 					href="#"
 					target="_blank"
 					@mouseenter="(event) => mouseEnter(event)"
-					@mouseleave="(event) => mouseLeave(event)"
+					@mouseleave="() => mouseLeave()"
 				>
-					<span class="user-links-list__item-link-name">LinkedIn</span>
-					<div ref="follower" class="follower"></div>
+					<span ref="textRef" class="user-links-list__item-link-name">LinkedIn</span>
+					<div ref="flairRef" class="user-links-list__item-link-flair"></div>
 				</a>
 			</li>
 			<li class="user-links-list__item">
@@ -80,30 +110,6 @@
 </template>
 
 <style>
-	.follower {
-		background-color: crimson;
-		z-index: 1;
-		border-radius: 50%;
-		transform: translate(-50%, -50%);
-		width: 10px;
-		height: 10px;
-
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-		bottom: 0;
-		left: 0;
-		pointer-events: none;
-		position: absolute;
-		right: 0;
-		top: 0;
-		transform-origin: 0 0;
-		will-change: transform;
-		translate: none;
-		rotate: none;
-		scale: none;
-	}
-
 	.social-links-profile {
 		max-width: 32.7rem;
 		width: 100%;
@@ -164,8 +170,32 @@
 		padding: 0;
 	}
 
+	.user-links-list__item-link-flair {
+		background-color: #c4f82a;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		width: 10px;
+		height: 10px;
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		top: 0;
+		transform-origin: 0 0;
+		will-change: transform;
+		pointer-events: none;
+		position: absolute;
+		translate: none;
+		rotate: none;
+		scale: none;
+		z-index: 1;
+	}
+
 	.user-links-list__item {
 		width: 100%;
+		position: relative;
 	}
 
 	.user-links-list__item-link {
@@ -177,6 +207,8 @@
 		text-decoration: none;
 		border-radius: 0.8rem;
 		background: var(--grey);
+		position: relative;
+		overflow: hidden;
 	}
 
 	.user-links-list__item-link-name {
@@ -184,6 +216,8 @@
 		font-weight: 700;
 		font-size: 1.4rem;
 		color: var(--white);
+		pointer-events: none;
+		z-index: 2;
 	}
 
 	@media only screen and (min-width: 768px) {
