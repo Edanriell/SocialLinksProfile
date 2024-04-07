@@ -9,7 +9,7 @@
 	const flairRef = ref(null);
 	const textRef = ref(null);
 
-	const mouseMoveListener = (event: any) => {
+	const handleMouseMove = (event: any) => {
 		const { target, offsetX, offsetY } = event;
 
 		const targetWidth = target.getBoundingClientRect().width;
@@ -24,8 +24,11 @@
 		});
 	};
 
-	const mouseEnter = (event: any) => {
+	const handleMouseEnter = (event: any) => {
 		const { offsetX, offsetY } = event;
+
+		console.log(event.touches[0].clientX, event.touches[0].clientY);
+		console.log(offsetX, offsetY);
 
 		gsap.to(textRef.value, {
 			color: "#333",
@@ -40,10 +43,10 @@
 			translateY: offsetY
 		});
 
-		window.addEventListener("mousemove", mouseMoveListener);
+		window.addEventListener("mousemove", handleMouseMove);
 	};
 
-	const mouseLeave = () => {
+	const handleMouseLeave = () => {
 		gsap.to(textRef.value, {
 			color: "#fff",
 			duration: 0.25,
@@ -57,7 +60,7 @@
 			ease: "power1"
 		});
 
-		window.removeEventListener("mousemove", mouseMoveListener);
+		window.removeEventListener("mousemove", handleMouseMove);
 	};
 </script>
 
@@ -88,8 +91,10 @@
 					class="user-links-list__item-link"
 					href="#"
 					target="_blank"
-					@mouseenter="(event) => mouseEnter(event)"
-					@mouseleave="() => mouseLeave()"
+					@mouseenter="(event) => handleMouseEnter(event)"
+					@mouseleave="() => handleMouseLeave()"
+					@touchstart="(event: any) => handleMouseEnter(event)"
+					@touchend="(event: any) => handleMouseLeave()"
 				>
 					<span ref="textRef" class="user-links-list__item-link-name">LinkedIn</span>
 					<div ref="flairRef" class="user-links-list__item-link-flair"></div>
