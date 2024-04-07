@@ -8,6 +8,7 @@
 
 	const flairRef = ref(null);
 	const textRef = ref(null);
+	const linkRef = ref(null);
 
 	const handleMouseMove = (event: any) => {
 		const { target, offsetX, offsetY } = event;
@@ -27,9 +28,6 @@
 	const handleMouseEnter = (event: any) => {
 		const { offsetX, offsetY } = event;
 
-		console.log(event.touches[0].clientX, event.touches[0].clientY);
-		console.log(offsetX, offsetY);
-
 		gsap.to(textRef.value, {
 			color: "#333",
 			duration: 0.25,
@@ -40,7 +38,8 @@
 			width: "0px",
 			height: "0px",
 			translateX: offsetX,
-			translateY: offsetY
+			translateY: offsetY,
+			opacity: 1
 		});
 
 		window.addEventListener("mousemove", handleMouseMove);
@@ -61,6 +60,34 @@
 		});
 
 		window.removeEventListener("mousemove", handleMouseMove);
+	};
+
+	const handleTouchStart = () => {
+		gsap.to(textRef.value, {
+			color: "#333",
+			duration: 0.25,
+			ease: "power1"
+		});
+
+		gsap.to(linkRef.value, {
+			backgroundColor: "#c4f82a",
+			duration: 0.25,
+			ease: "power1"
+		});
+	};
+
+	const handleTouchEnd = () => {
+		gsap.to(textRef.value, {
+			color: "#fff",
+			duration: 0.25,
+			ease: "power1"
+		});
+
+		gsap.to(linkRef.value, {
+			backgroundColor: "#333333",
+			duration: 0.25,
+			ease: "power1"
+		});
 	};
 </script>
 
@@ -91,10 +118,12 @@
 					class="user-links-list__item-link"
 					href="#"
 					target="_blank"
-					@mouseenter="(event) => handleMouseEnter(event)"
-					@mouseleave="() => handleMouseLeave()"
-					@touchstart="(event: any) => handleMouseEnter(event)"
-					@touchend="(event: any) => handleMouseLeave()"
+					ref="linkRef"
+					type="button"
+					@mouseenter="handleMouseEnter"
+					@mouseleave="handleMouseLeave"
+					@touchstart="handleTouchStart"
+					@touchend="handleTouchEnd"
 				>
 					<span ref="textRef" class="user-links-list__item-link-name">LinkedIn</span>
 					<div ref="flairRef" class="user-links-list__item-link-flair"></div>
@@ -176,7 +205,8 @@
 	}
 
 	.user-links-list__item-link-flair {
-		background-color: #c4f82a;
+		background-color: var(--neon-green);
+		opacity: 0;
 		border-radius: 50%;
 		transform: translate(-50%, -50%);
 		width: 10px;
