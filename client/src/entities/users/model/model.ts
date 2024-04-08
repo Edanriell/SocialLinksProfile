@@ -1,12 +1,16 @@
 export type User = {
-	name: string;
-	surname: string;
+	images: {
+		mobile: string;
+		tablet: string;
+		desktop: string;
+	};
+	fullName: string;
 	location: string;
-	info: string;
-	links: Array<Link>;
+	userInfo: string;
+	socialLinks: Array<SocialLink>;
 };
 
-type Link = {
-	name: string;
-	address: string;
+type SocialLink = {
+	linkText: string;
+	linkHref: string;
 };
