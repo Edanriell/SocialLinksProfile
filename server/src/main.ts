@@ -1,24 +1,22 @@
 import { NestFactory } from "@nestjs/core";
-import bodyParser from "body-parser";
-import compression from "compression";
+import type { NestExpressApplication } from "@nestjs/platform-express";
 import helmet from "helmet";
+import * as compression from "compression";
+
+import { corsOptions, httpsConfig } from "./config";
 
 import { AppModule } from "./app.module";
 
-import { corsOptions, httpsConfig, tooBusyConfig } from "./config";
-
 async function startServer() {
-	const app = await NestFactory.create(AppModule);
+	const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
 	app.enableCors(corsOptions);
-	app.use(bodyParser.json({ limit: "50kb" }));
-	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(compression());
+	app.useBodyParser("json", { limit: "50kb" });
 	app.use(helmet());
 	app.use(httpsConfig);
-	app.use(tooBusyConfig);
 
-	await app.listen(app.get("ConfigService").get("PORT"));
+	await app.listen(3000);
 }
 
 startServer();

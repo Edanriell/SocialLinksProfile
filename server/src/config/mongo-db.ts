@@ -1,13 +1,13 @@
-import { connect } from "mongoose";
-
-import { appConfig } from "./env.config";
-
-// import mongoose, { connect } from 'mongoose';
-// mongoose.set('debug', true); // <--- Enables debug logs
-
-const connectToMongoDb = async () => {
-	const mongoDbUri = appConfig.dbUrl ?? "mongodb://localhost:27017";
-	await connect(mongoDbUri);
-};
-
-export { connectToMongoDb };
+// import { connect } from "mongoose";
+//
+// import { appConfig } from "./env.config";
+//
+// // import mongoose, { connect } from 'mongoose';
+// // mongoose.set('debug', true); // <--- Enables debug logs
+//
+// const connectToMongoDb = async () => {
+// 	const mongoDbUri = appConfig.dbUrl ?? "mongodb://localhost:27017";
+// 	await connect(mongoDbUri);
+// };
+//
+// export { connectToMongoDb };

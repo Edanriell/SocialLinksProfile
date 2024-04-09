@@ -5,7 +5,7 @@ import { UsersService } from "../services";
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
-	@Get()
+	@Get("user")
 	getHello(): string {
 		return this.usersService.getHello();
 	}
