@@ -10,14 +10,16 @@ export class UsersService {
 		private catModel: Model<User>
 	) {}
 
-	getHello(): string {
+	getUser(): string {
 		return "Test";
 	}
 
-	async create(createCatDto: UserDto): Promise<User> {
+	async createUser(createCatDto: UserDto): Promise<User> {
 		const createdCat = new this.catModel(createCatDto);
 		return createdCat.save();
 	}
+
+	async seedUsersData() {}
 
 	async findAll(): Promise<User[]> {
 		return this.catModel.find().exec();
