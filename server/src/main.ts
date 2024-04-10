@@ -1,8 +1,22 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { NestFactory } from "@nestjs/core";
+import helmet from "helmet";
+import * as compression from "compression";
+import type { NestExpressApplication } from "@nestjs/platform-express";
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
-}
-bootstrap();
+import { corsOptions, httpsConfig } from "./config";
+
+import { AppModule } from "./app.module";
+
+const startServer = async () => {
+	const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+	app.enableCors(corsOptions);
+	app.use(compression());
+	app.useBodyParser("json", { limit: "50kb" });
+	app.use(helmet());
+	app.use(httpsConfig);
+
+	await app.listen(3000);
+};
+
+startServer();
