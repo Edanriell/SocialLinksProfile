@@ -2,7 +2,7 @@ import { Controller, Get, Ip } from "@nestjs/common";
 import { Throttle } from "@nestjs/throttler";
 
 import { UsersService } from "../services";
-import { LoggerService } from "../../logger/logger.service";
+import { LoggerService } from "../../logger/services";
 
 @Controller()
 export class UsersController {
