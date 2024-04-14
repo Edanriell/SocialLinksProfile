@@ -1,5 +1,6 @@
 import { Model } from "mongoose";
 import { Inject, Injectable } from "@nestjs/common";
+
 import { User } from "../models";
 import { UserDto } from "../dtos";
 
@@ -26,4 +27,4 @@ export class UsersService {
 	}
 }
 
-// METHODS ARE NOT QUITE GOOD HERE
+// DUMMY METHODS

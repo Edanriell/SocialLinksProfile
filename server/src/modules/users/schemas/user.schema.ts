@@ -1,6 +1,6 @@
 import * as mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema({
 	images: {
 		mobile: {
 			_id: false,
@@ -48,5 +48,3 @@ const UserSchema = new mongoose.Schema({
 		}
 	]
 });
-
-export { UserSchema };

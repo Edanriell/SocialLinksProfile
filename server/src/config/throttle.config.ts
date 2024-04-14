@@ -1,4 +1,4 @@
-const throttleConfig = [
+export const throttleConfig = [
 	{
 		name: "short",
 		ttl: 1000,
@@ -15,5 +15,3 @@ const throttleConfig = [
 		limit: 100
 	}
 ];
-
-export { throttleConfig };

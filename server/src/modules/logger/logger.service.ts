@@ -4,8 +4,8 @@ import { promises as fsPromises } from "fs";
 import * as path from "path";
 
 @Injectable()
-class LoggerService extends ConsoleLogger {
-	async logToFile(entry) {
+export class LoggerService extends ConsoleLogger {
+	private async logToFile(entry: any) {
 		const formattedEntry = `${Intl.DateTimeFormat("en-US", {
 			dateStyle: "short",
 			timeStyle: "short",
@@ -40,14 +40,12 @@ class LoggerService extends ConsoleLogger {
 	public warn(message: any, context?: string) {
 		const entry = `${context}\t${message}`;
 		this.logToFile(entry);
-		super.log(message, context);
+		super.warn(message, context);
 	}
 
 	public fatal(message: any, stackOrContext?: string) {
 		const entry = `${stackOrContext}\t${message}`;
 		this.logToFile(entry);
-		super.error(message, stackOrContext);
+		super.fatal(message, stackOrContext);
 	}
 }
-
-export { LoggerService };

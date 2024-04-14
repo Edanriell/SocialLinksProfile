@@ -1,6 +1,6 @@
 import { User } from "../models";
 
-class UserDto {
+export class UserDto {
 	public id;
 	public images;
 	public fullName;
@@ -17,5 +17,3 @@ class UserDto {
 		this.socialLinks = model.socialLinks;
 	}
 }
-
-export { UserDto };
