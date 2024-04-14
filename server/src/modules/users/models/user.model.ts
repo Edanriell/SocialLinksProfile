@@ -1,6 +1,6 @@
 import { Document } from "mongoose";
 
-type User = {
+export type User = {
 	images: {
 		mobile: string;
 		tablet: string;
@@ -16,5 +16,3 @@ type SocialLink = {
 	linkText: string;
 	linkHref: string;
 };
-
-export { type User };

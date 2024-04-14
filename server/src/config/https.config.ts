@@ -5,5 +5,4 @@ const httpsConfig = helmet.hsts({
 	includeSubDomains: true,
 	preload: true
 });
-
 export { httpsConfig };

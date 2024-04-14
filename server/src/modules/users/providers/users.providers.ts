@@ -1,4 +1,5 @@
 import { Connection } from "mongoose";
+
 import { UserSchema } from "../schemas";
 
 export const userProviders = [
