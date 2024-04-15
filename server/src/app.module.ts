@@ -1,11 +1,20 @@
 import { Module } from "@nestjs/common";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { APP_GUARD } from "@nestjs/core";
+import { ConfigModule } from "@nestjs/config";
 
-import { EnvConfigModule, RouterConfigModule, throttleConfig } from "./config";
+import { RouterConfigModule, throttleConfig, validate } from "./config";
 
 @Module({
-	imports: [EnvConfigModule, RouterConfigModule, ThrottlerModule.forRoot(throttleConfig)],
+	imports: [
+		RouterConfigModule,
+		ThrottlerModule.forRoot(throttleConfig),
+		ConfigModule.forRoot({
+			isGlobal: true,
+			envFilePath: `.env.${process.env.NODE_ENV}`,
+			validate
+		})
+	],
 	providers: [
 		{
 			provide: APP_GUARD,
@@ -14,5 +23,3 @@ import { EnvConfigModule, RouterConfigModule, throttleConfig } from "./config";
 	]
 })
 export class AppModule {}
-
-// ENVConfigModule is broken!
