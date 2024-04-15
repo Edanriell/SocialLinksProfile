@@ -8,7 +8,7 @@ import { UsersModule } from "../modules";
 		UsersModule,
 		RouterModule.register([
 			{
-				path: "api",
+				path: "",
 				children: [UsersModule]
 			}
 		])

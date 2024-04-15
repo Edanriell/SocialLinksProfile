@@ -15,6 +15,7 @@ const startServer = async () => {
 	app.useBodyParser("json", { limit: "50kb" });
 	app.use(helmet());
 	app.use(httpsConfig);
+	app.setGlobalPrefix("api");
 
 	await app.listen(3000);
 };
