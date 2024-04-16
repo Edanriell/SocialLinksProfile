@@ -9,7 +9,7 @@ export class UsersController {
 
 	@Throttle({ short: { ttl: 1000, limit: 1 } })
 	@Get("user")
-	getUser() {
-		return this.usersService.getUser();
+	async getUser() {
+		return await this.usersService.getUser();
 	}
 }
