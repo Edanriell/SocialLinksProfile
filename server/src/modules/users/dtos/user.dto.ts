@@ -1,6 +1,6 @@
 import { User } from "../models";
 
-export class GetUserQueryDto {
+export class UserDto {
 	public id;
 	public images;
 	public fullName;
