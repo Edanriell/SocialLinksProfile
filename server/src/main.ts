@@ -4,8 +4,8 @@ import * as compression from "compression";
 import type { NestExpressApplication } from "@nestjs/platform-express";
 import { ConfigService } from "@nestjs/config";
 
+import { UsersSeederService } from "./modules/users/services";
 import { corsOptions, httpsConfig } from "./config";
-
 import { AppModule } from "./app.module";
 
 const startServer = async () => {
@@ -19,6 +19,8 @@ const startServer = async () => {
 	app.use(helmet());
 	app.use(httpsConfig);
 	app.setGlobalPrefix("api");
+
+	await UsersSeederService.seedUsersData();
 
 	await app.listen(configService.get<number>("PORT") || 3000);
 };
