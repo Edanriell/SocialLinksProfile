@@ -1,37 +1,40 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-	import { Link } from "@shared/ui";
+import {onMounted, ref} from "vue";
 
-	import imageMobile from "./assets/profile-mobile.jpg";
-	import imageTablet from "./assets/profile-tablet.jpg";
-	import imageDesktop from "./assets/profile-tablet.jpg";
+import {getUserQuery, type User} from "@/entities/users";
+import {Link} from "@shared/ui";
+
+const userData = ref<User | null>(null);
+const isDataLoading = ref("notLoading")
+
+onMounted(async () => {
+	try {
+		isDataLoading.value = "loading";
+		const data = await getUserQuery();
+		if (data) userData.value = data;
+		isDataLoading.value = "loaded";
+	} catch (error) {
+		isDataLoading.value = "error";
+		console.error("Error fetching data:", error);
+	}
+})
 </script>
 
 <template>
 	<article class="social-links-profile">
 		<picture>
-			<source media="(min-width: 375px)" :srcset="imageMobile" />
-			<source media="(min-width: 768px)" :srcset="imageTablet" />
-			<source media="(min-width: 1024px)" :srcset="imageDesktop" />
-			<img class="social-links-profile__user-image" :src="imageDesktop" alt="User X profile" />
+			<source media="(min-width: 375px)" :srcset=userData?.images.mobile />
+			<source media="(min-width: 768px)" :srcset=userData?.images.tablet />
+			<source media="(min-width: 1024px)" :srcset=userData?.images.desktop />
+			<img class="social-links-profile__user-image" :src=userData?.images.desktop alt="User X profile" />
 		</picture>
-		<h2 class="social-links-profile__user-full-name">Jessica Randall</h2>
-		<p class="social-links-profile__user-location">London, United Kingdom</p>
-		<p class="social-links-profile__user-info">"Front-end developer and avid reader."</p>
+		<h2 class="social-links-profile__user-full-name">{{userData?.fullName}}</h2>
+		<p class="social-links-profile__user-location">{{userData?.location}}</p>
+		<p class="social-links-profile__user-info">{{userData?.userInfo}}</p>
 		<ul class="social-links-profile__user-link-list user-links-list">
-			<li class="user-links-list__item">
-				<Link linkText="GitHub" linkHref="#" />
-			</li>
-			<li class="user-links-list__item">
-				<Link linkText="Frontend Mentor" linkHref="#" />
-			</li>
-			<li class="user-links-list__item">
-				<Link linkText="LinkedIn" linkHref="#" />
-			</li>
-			<li class="user-links-list__item">
-				<Link linkText="Twitter" linkHref="#" />
-			</li>
-			<li class="user-links-list__item">
-				<Link linkText="Instagram" linkHref="#" />
+			<li v-for="(link, index) in userData?.socialLinks" :key="index" class="user-links-list__item">
+				<Link :linkText="link.linkText" :linkHref="link.linkHref" />
 			</li>
 		</ul>
 	</article>
