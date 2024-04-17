@@ -1,5 +1,5 @@
 export const getUserQuery = async () => {
-	const response = await fetch(import.meta.env.VITE_API_URL! + "api/getrecipe", {
+	const response = await fetch(import.meta.env.VITE_API_URL! + "api/user", {
 		method: "Get"
 	});
 
