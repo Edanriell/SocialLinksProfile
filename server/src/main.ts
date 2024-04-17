@@ -1,8 +1,28 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { NestFactory } from "@nestjs/core";
+import helmet from "helmet";
+import * as compression from "compression";
+import type { NestExpressApplication } from "@nestjs/platform-express";
+import { ConfigService } from "@nestjs/config";
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
-}
-bootstrap();
+import { UsersSeederService } from "./modules/users/services";
+import { corsOptions, httpsConfig } from "./config";
+import { AppModule } from "./app.module";
+
+const startServer = async () => {
+	const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+	const configService = app.get(ConfigService);
+
+	app.enableCors(corsOptions);
+	app.use(compression());
+	app.useBodyParser("json", { limit: "50kb" });
+	app.use(helmet());
+	app.use(httpsConfig);
+	app.setGlobalPrefix("api");
+
+	await UsersSeederService.seedUsersData();
+
+	await app.listen(configService.get<number>("PORT") || 3000);
+};
+
+startServer();
