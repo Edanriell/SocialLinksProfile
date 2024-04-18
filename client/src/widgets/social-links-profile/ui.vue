@@ -1,12 +1,13 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import Skeleton from "primevue/skeleton";
 import {onMounted, ref} from "vue";
 
 import {getUserQuery, type User} from "@/entities/users";
-import {Link} from "@shared/ui";
+import {Link} from "@/shared/ui";
 
 const userData = ref<User | null>(null);
-const isDataLoading = ref("notLoading")
+const isDataLoading = ref("notLoading");
 
 onMounted(async () => {
 	try {
@@ -22,7 +23,32 @@ onMounted(async () => {
 </script>
 
 <template>
-	<article class="social-links-profile">
+	<article v-if="isDataLoading === 'loading'" class="social-links-profile">
+		<picture>
+			<Skeleton shape="circle" size="8.8rem" class="social-links-profile__user-image"></Skeleton>
+		</picture>
+		<Skeleton width="18.318rem" height="3.6rem" class="social-links-profile__user-full-name"></Skeleton>
+		<Skeleton width="16.871rem" height="2.099rem" class="social-links-profile__user-location"></Skeleton>
+		<Skeleton width="24.834rem" height="2.099rem" class="social-links-profile__user-info"></Skeleton>
+		<ul class="social-links-profile__user-link-list user-links-list">
+			<li class="user-links-list__item">
+				<Skeleton width="100%" height="4.496rem"></Skeleton>
+			</li>
+			<li class="user-links-list__item">
+				<Skeleton width="100%" height="4.496rem"></Skeleton>
+			</li>
+			<li class="user-links-list__item">
+				<Skeleton width="100%" height="4.496rem"></Skeleton>
+			</li>
+			<li class="user-links-list__item">
+				<Skeleton width="100%" height="4.496rem"></Skeleton>
+			</li>
+			<li class="user-links-list__item">
+				<Skeleton width="100%" height="4.496rem"></Skeleton>
+			</li>
+		</ul>
+	</article>
+	<article v-if="isDataLoading === 'loaded'" class="social-links-profile">
 		<picture>
 			<source media="(min-width: 375px)" :srcset=userData?.images.mobile />
 			<source media="(min-width: 768px)" :srcset=userData?.images.tablet />
