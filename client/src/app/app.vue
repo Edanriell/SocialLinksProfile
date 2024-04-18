@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { SocialLinksProfile } from "@widgets/social-links-profile";
+import {SocialLinksProfile} from "@widgets/social-links-profile";
 </script>
 
 <template>

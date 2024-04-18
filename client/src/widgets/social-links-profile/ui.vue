@@ -3,8 +3,9 @@
 import Skeleton from "primevue/skeleton";
 import {onMounted, ref} from "vue";
 
-import {getUserQuery, type User} from "@/entities/users";
-import {Link} from "@/shared/ui";
+import {getUserQuery} from "@entities/users";
+import {type User} from "@entities/users/model";
+import {Link} from "@shared/ui";
 
 const userData = ref<User | null>(null);
 const isDataLoading = ref("notLoading");
@@ -23,7 +24,14 @@ onMounted(async () => {
 </script>
 
 <template>
+	<article v-if="isDataLoading === 'error'" class="social-links-profile">
+		<div class="social-links-profile__error">
+			<img class="social-links-profile__error-icon" src="/icons/circle-exclamation-solid.svg" alt="Error icon.">
+			<h2 class="social-links-profile__error-text">Unable to load social links profile.</h2>
+		</div>
+	</article>
 	<article v-if="isDataLoading === 'loading'" class="social-links-profile">
+		<h2 class="visually-hidden">Social links profile is loading.</h2>
 		<picture>
 			<Skeleton shape="circle" size="8.8rem" class="social-links-profile__user-image"></Skeleton>
 		</picture>
@@ -53,7 +61,7 @@ onMounted(async () => {
 			<source media="(min-width: 375px)" :srcset=userData?.images.mobile />
 			<source media="(min-width: 768px)" :srcset=userData?.images.tablet />
 			<source media="(min-width: 1024px)" :srcset=userData?.images.desktop />
-			<img class="social-links-profile__user-image" :src=userData?.images.desktop alt="User X profile" />
+			<img class="social-links-profile__user-image" :src=userData?.images.desktop alt="User {{userData?.fullName}} profile." />
 		</picture>
 		<h2 class="social-links-profile__user-full-name">{{userData?.fullName}}</h2>
 		<p class="social-links-profile__user-location">{{userData?.location}}</p>
@@ -87,7 +95,7 @@ onMounted(async () => {
 	}
 
 	.social-links-profile__user-full-name {
-		font-family: var(--font-family);
+		font-family: var(--font-family),serif;
 		font-weight: 600;
 		font-size: 2.4rem;
 		color: var(--white);
@@ -95,8 +103,31 @@ onMounted(async () => {
 		text-align: center;
 	}
 
+	.social-links-profile__error {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 4rem;
+	}
+
+	.social-links-profile__error-text {
+		font-family: var(--font-family),serif;
+		font-weight: 600;
+		font-size: 2rem;
+		color: var(--white);
+		margin: 0 0 0.4rem;
+		text-align: center;
+	}
+
+	.social-links-profile__error-icon {
+		width: 9.5rem;
+		height: 9.5rem;
+		object-fit: cover;
+		border-radius: 50%;
+	}
+
 	.social-links-profile__user-location {
-		font-family: var(--font-family);
+		font-family: var(--font-family),serif;
 		font-weight: 700;
 		font-size: 1.4rem;
 		color: var(--neon-green);
@@ -106,7 +137,7 @@ onMounted(async () => {
 
 	.social-links-profile__user-info {
 		margin: 0 0 2.4rem;
-		font-family: var(--font-family);
+		font-family: var(--font-family),serif;
 		font-weight: 400;
 		font-size: 1.4rem;
 		color: var(--white);
