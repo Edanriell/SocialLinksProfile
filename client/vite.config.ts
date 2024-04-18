@@ -1,5 +1,5 @@
-import { fileURLToPath, URL } from "url";
-import { defineConfig } from "vite";
+import {fileURLToPath, URL} from "url";
+import {defineConfig} from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueDevTools from "vite-plugin-vue-devtools";
@@ -10,6 +10,8 @@ export default defineConfig({
 		alias: [
 			{ find: "@", replacement: fileURLToPath(new URL("./src", import.meta.url)) },
 			{ find: "@app", replacement: fileURLToPath(new URL("./src/app", import.meta.url)) },
+			{ find: "@entities", replacement: fileURLToPath(new URL("./src/entities", import.meta.url)) },
+			{ find: "@entities/users", replacement: fileURLToPath(new URL("./src/entities/users", import.meta.url)) },
 			{ find: "@widgets", replacement: fileURLToPath(new URL("./src/widgets", import.meta.url)) },
 			{
 				find: "@widgets/social-links-profile",

@@ -1,95 +1,96 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-	import gsap from "gsap";
-	import { ref } from "vue";
+import gsap from "gsap";
+import {ref} from "vue";
 
-	const props = defineProps({
-		linkText: String,
-		linkHref: String
+defineProps({
+	linkText: String,
+	linkHref: String
+});
+
+const flairRef = ref(null);
+const textRef = ref(null);
+const linkRef = ref(null);
+
+const handleMouseMove = (event: any) => {
+	const { target, offsetX, offsetY } = event;
+
+	const targetWidth = target.getBoundingClientRect().width;
+
+	gsap.to(flairRef.value, {
+		translateX: offsetX,
+		translateY: offsetY,
+		width: targetWidth * 1.5 + "px",
+		height: targetWidth * 1.5 + "px",
+		duration: 0.25,
+		ease: "power1"
+	});
+};
+
+const handleMouseEnter = (event: any) => {
+	const { offsetX, offsetY } = event;
+
+	gsap.to(textRef.value, {
+		color: "#333",
+		duration: 0.25,
+		ease: "power1"
 	});
 
-	const flairRef = ref(null);
-	const textRef = ref(null);
-	const linkRef = ref(null);
+	gsap.set(flairRef.value, {
+		width: "0px",
+		height: "0px",
+		translateX: offsetX,
+		translateY: offsetY,
+		opacity: 1
+	});
 
-	const handleMouseMove = (event: any) => {
-		const { target, offsetX, offsetY } = event;
+	window.addEventListener("mousemove", handleMouseMove);
+};
 
-		const targetWidth = target.getBoundingClientRect().width;
+const handleMouseLeave = () => {
+	gsap.to(textRef.value, {
+		color: "#fff",
+		duration: 0.25,
+		ease: "power1"
+	});
 
-		gsap.to(flairRef.value, {
-			translateX: offsetX,
-			translateY: offsetY,
-			width: targetWidth * 1.5 + "px",
-			height: targetWidth * 1.5 + "px",
-			duration: 0.25,
-			ease: "power1"
-		});
-	};
+	gsap.to(flairRef.value, {
+		width: "0px",
+		height: "0px",
+		duration: 0.25,
+		ease: "power1"
+	});
 
-	const handleMouseEnter = (event: any) => {
-		const { offsetX, offsetY } = event;
+	window.removeEventListener("mousemove", handleMouseMove);
+};
 
-		gsap.to(textRef.value, {
-			color: "#333",
-			duration: 0.25,
-			ease: "power1"
-		});
+const handleTouchStart = () => {
+	gsap.to(textRef.value, {
+		color: "#333",
+		duration: 0.25,
+		ease: "power1"
+	});
 
-		gsap.set(flairRef.value, {
-			width: "0px",
-			height: "0px",
-			translateX: offsetX,
-			translateY: offsetY,
-			opacity: 1
-		});
+	gsap.to(linkRef.value, {
+		backgroundColor: "#c4f82a",
+		duration: 0.25,
+		ease: "power1"
+	});
+};
 
-		window.addEventListener("mousemove", handleMouseMove);
-	};
+const handleTouchEnd = () => {
+	gsap.to(textRef.value, {
+		color: "#fff",
+		duration: 0.25,
+		ease: "power1"
+	});
 
-	const handleMouseLeave = () => {
-		gsap.to(textRef.value, {
-			color: "#fff",
-			duration: 0.25,
-			ease: "power1"
-		});
-
-		gsap.to(flairRef.value, {
-			width: "0px",
-			height: "0px",
-			duration: 0.25,
-			ease: "power1"
-		});
-
-		window.removeEventListener("mousemove", handleMouseMove);
-	};
-
-	const handleTouchStart = () => {
-		gsap.to(textRef.value, {
-			color: "#333",
-			duration: 0.25,
-			ease: "power1"
-		});
-
-		gsap.to(linkRef.value, {
-			backgroundColor: "#c4f82a",
-			duration: 0.25,
-			ease: "power1"
-		});
-	};
-
-	const handleTouchEnd = () => {
-		gsap.to(textRef.value, {
-			color: "#fff",
-			duration: 0.25,
-			ease: "power1"
-		});
-
-		gsap.to(linkRef.value, {
-			backgroundColor: "#333333",
-			duration: 0.25,
-			ease: "power1"
-		});
-	};
+	gsap.to(linkRef.value, {
+		backgroundColor: "#333333",
+		duration: 0.25,
+		ease: "power1"
+	});
+};
 </script>
 
 <template>
@@ -148,7 +149,7 @@
 	}
 
 	.link__text {
-		font-family: var(--font-family);
+		font-family: var(--font-family),serif;
 		font-weight: 700;
 		font-size: 1.4rem;
 		color: var(--white);

@@ -9,6 +9,8 @@
 		"paths": {
 			"@/*": ["./src/*"],
 			"@app/*": ["./src/app/*"],
+			"@entities/*": ["./src/entities/*"],
+			"@entities/users/*": ["./src/entities/users/*"],
 			"@widgets/*": ["./src/widgets/*"],
 			"@widgets/social-links-profile/*": ["./src/widgets/social-links-profile/*"],
 			"@shared/*": ["./src/shared/*"],

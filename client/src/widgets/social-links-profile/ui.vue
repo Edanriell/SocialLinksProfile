@@ -3,8 +3,9 @@
 import Skeleton from "primevue/skeleton";
 import {onMounted, ref} from "vue";
 
-import {getUserQuery, type User} from "@/entities/users";
-import {Link} from "@/shared/ui";
+import {getUserQuery} from "@entities/users";
+import {type User} from "@entities/users/model";
+import {Link} from "@shared/ui";
 
 const userData = ref<User | null>(null);
 const isDataLoading = ref("notLoading");
@@ -23,7 +24,11 @@ onMounted(async () => {
 </script>
 
 <template>
+	<article v-if="isDataLoading === 'error'" class="social-links-profile">
+		<h2 class="social-links-profile__error">Unable to load social links profile.</h2>
+	</article>
 	<article v-if="isDataLoading === 'loading'" class="social-links-profile">
+		<h2 class="visually-hidden">Social links profile is loading.</h2>
 		<picture>
 			<Skeleton shape="circle" size="8.8rem" class="social-links-profile__user-image"></Skeleton>
 		</picture>
@@ -87,16 +92,25 @@ onMounted(async () => {
 	}
 
 	.social-links-profile__user-full-name {
-		font-family: var(--font-family);
+		font-family: var(--font-family),serif;
 		font-weight: 600;
 		font-size: 2.4rem;
 		color: var(--white);
 		margin: 0 0 0.4rem;
 		text-align: center;
 	}
+	
+	.social-links-profile__error {
+		font-family: var(--font-family),serif;
+		font-weight: 600;
+		font-size: 2rem;
+		color: var(--white);
+		margin: 0 0 0.4rem;
+		text-align: center;
+	}
 
 	.social-links-profile__user-location {
-		font-family: var(--font-family);
+		font-family: var(--font-family),serif;
 		font-weight: 700;
 		font-size: 1.4rem;
 		color: var(--neon-green);
@@ -106,7 +120,7 @@ onMounted(async () => {
 
 	.social-links-profile__user-info {
 		margin: 0 0 2.4rem;
-		font-family: var(--font-family);
+		font-family: var(--font-family),serif;
 		font-weight: 400;
 		font-size: 1.4rem;
 		color: var(--white);
