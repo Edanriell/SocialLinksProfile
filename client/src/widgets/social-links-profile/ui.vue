@@ -30,7 +30,7 @@ onMounted(async () => {
 			<h2 class="social-links-profile__error-text">Unable to load social links profile.</h2>
 		</div>
 	</article>
-	<article v-if="isDataLoading === 'loading'" class="social-links-profile">
+	<article data-testid="social-links-profile-skeleton" v-if="isDataLoading === 'loading'" class="social-links-profile">
 		<h2 class="visually-hidden">Social links profile is loading.</h2>
 		<picture>
 			<Skeleton shape="circle" size="8.8rem" class="social-links-profile__user-image"></Skeleton>

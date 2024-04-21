@@ -1,5 +1,8 @@
 {
   "files": [],
+  "include": [
+    "./jest-setup.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

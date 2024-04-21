@@ -99,11 +99,12 @@ const handleTouchEnd = () => {
 		:href="linkHref"
 		target="_blank"
 		ref="linkRef"
-		type="button"
+		role="link"
 		@mouseenter="handleMouseEnter"
 		@mouseleave="handleMouseLeave"
 		@touchstart="handleTouchStart"
 		@touchend="handleTouchEnd"
+		data-testid="link-ref"
 	>
 		<span ref="textRef" class="link__text">{{ linkText }}</span>
 		<div ref="flairRef" class="link__flair"></div>
