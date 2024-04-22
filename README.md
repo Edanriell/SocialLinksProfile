@@ -1,2 +1,2 @@
 # SocialLinksProfile
-![SocialLinksProfile](https://github.com/Edanriell/RecipePage/blob/develop/recipe-page.png?raw=true)
+![SocialLinksProfile](https://github.com/Edanriell/SocialLinksProfile/blob/develop/social-links-profile.png?raw=true)
