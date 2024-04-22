@@ -1,39 +1,12 @@
-# client
+# SocialLinksProfile Client
 
-This template should help get you started developing with Vue 3 in Vite.
+To run server in development mode you must:
+- Configure .env file (Check out .env examples);
+- Start client, use command start:dev;
 
-## Recommended IDE Setup
+To run client in production mode you must:
+- Configure .env file (Check out .env examples);
+- Build client, use command start:build-only;
+- Open directory with dist folder, open terminal there and run command <strong>python -m http.server 8000 --directory dist </strong>, to serve files locally;
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Client is tested and is fully working in Chromium browsers, also in Firefox.
