@@ -1,17 +1,13 @@
-import { join } from "path";
+import {join} from "path";
 import * as fs from "fs";
 import * as mongoose from "mongoose";
-import { Model } from "mongoose";
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import {Model} from "mongoose";
+import {Injectable} from "@nestjs/common";
+import {ConfigService} from "@nestjs/config";
 
-import { User } from "../models";
-import { LoggerService } from "../../logger/services";
-import { UserSchema } from "../schemas";
-
-// HERE WILL BE PROBLEM WHEN PROD
-const rootFolderPath = join(__dirname, "..\\..\\..\\..\\src");
-const usersDataFilePath = `${rootFolderPath}\\data\\users.json`;
+import {User} from "../models";
+import {LoggerService} from "../../logger/services";
+import {UserSchema} from "../schemas";
 
 @Injectable()
 export class UsersSeederService {
@@ -65,7 +61,15 @@ export class UsersSeederService {
 	}
 
 	public static async seedUsersData() {
-		console.log(rootFolderPath);
+		const mode = new ConfigService().get<string>("NODE_ENV");
+		let rootFolderPath: string;
+		if (mode === "development") {
+			rootFolderPath = join(__dirname, "..\\..\\..\\..\\src");
+		} else {
+			rootFolderPath = join(__dirname, "..\\..\\..\\");
+		}
+		const usersDataFilePath = `${rootFolderPath}\\data\\users.json`;
+
 		await UsersSeederService.establishDatabaseConnection();
 
 		const usersInitialized = await this.userModel.find();
